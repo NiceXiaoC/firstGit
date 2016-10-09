@@ -7,39 +7,7 @@
  */
 
 
-var template  = {
-	
-	//树形菜单模板
-	treeMenuTemplate : function(data,id){
-		
-		var childs = dataControl.getChildById(data,id); //查找所有的子元素
-		
-		var html = "<ul style='display:block'>";
-		childs.forEach(function(item){
-			
-			//获取当前的数据在第几层
-			var level = dataControl.getLevelById(data,item.id);
-			
-			//判断当前数据有木有子集
-			var hasChild = dataControl.hasChilds(data,item.id);
-			
-			//如果有子元素，则显示下拉状态control，否则control-none
-			var classNames = hasChild ? "control" : "control-none";
-			html += `
-				<li>
-					<div class="title ${classNames}" style="padding-left:${level*14}px;" data-file-id="${item.id}">
-						<i class="icon icon1"></i>
-						<i class="icon icon2"></i>
-						<span>${item.title}</span>
-					</div>
-					${template.treeMenuTemplate(data,item.id)}
-				</li>
-			`;
-		});
-		html += "</ul>";
-		return html;
-	},
-	
+
 	//面包屑导航模板【parents:表示,所有的父级菜单】
 	breadNavTemp : function(parents){
 		var breadHtml = "";
